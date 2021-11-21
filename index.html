@@ -1,0 +1,35 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="<%=basePath%>">    
+    <title>评教系统管理中心</title>   
+    <meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+  </head>
+  
+  <body>
+	  			<ul class="ul1">
+	  				<li class="li1"><a href="addTeacher.jsp">新建教师 </a></li>
+	  				<li class="li1"><a href="showTeacher">教师管理 </a></li>
+	  				<li class="li1"><a href="addStudent.jsp">新建学生 </a></li>
+	  				<li class="li1"><a href="showStudent">学生管理 </a></li>
+	  				<li class="li1"><a href="addLeader.jsp" class="a4">新建领导</a></li>
+	  				<li class="li1"><a href="showLeader" class="a5">领导管理</a></li>
+	  				<li class="li1"><a href="addClass.jsp"class="a6">新建班级</a></li>
+	  				<li class="li1"><a href="showAllClass"class="a7">班级管理</a></li>
+	  			</ul>
+  </body>
+</html>

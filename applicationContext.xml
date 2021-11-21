@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/teacher?useUnicode=true&amp;characterEncoding=UTF-8">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123456"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+		destroy-method="destroy">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="annotatedPackages" value="classpath:/com/teacher/entity"></property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.teacher.entity.Student</value>
+				<value>com.teacher.entity.Class_class</value>
+				<value>com.teacher.entity.Teacher</value>
+				<value>com.teacher.entity.Leader</value>
+				<value>com.teacher.entity.Vote</value>
+				<value>com.teacher.entity.Mark</value>
+				<value>com.teacher.entity.Message</value>
+				<value>com.teacher.entity.Stu_cla</value>
+				<value>com.teacher.entity.Stu_tea_vot</value>
+				<value>com.teacher.entity.Tea_cla</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="studentDAO" class="com.teacher.dao.StudentDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="studentService" class="com.teacher.service.StudentServiceImpl">
+		<property name="studentDAO">
+			<ref bean="studentDAO" />
+		</property>
+	</bean>
+
+	<bean id="class_classDAO" class="com.teacher.dao.Class_classDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="class_classService" class="com.teacher.service.Class_classServiceImpl">
+		<property name="class_classDAO">
+			<ref bean="class_classDAO" />
+		</property>
+	</bean>
+
+	<bean id="teacherDAO" class="com.teacher.dao.TeacherDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="teacherService" class="com.teacher.service.TeacherServiceImpl">
+		<property name="teacherDAO">
+			<ref bean="teacherDAO" />
+		</property>
+	</bean>
+
+	<bean id="leaderDAO" class="com.teacher.dao.LeaderDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="leaderService" class="com.teacher.service.LeaderServiceImpl">
+		<property name="leaderDAO">
+			<ref bean="leaderDAO" />
+		</property>
+	</bean>
+
+	<bean id="voteDAO" class="com.teacher.dao.VoteDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="voteService" class="com.teacher.service.VoteServiceImpl">
+		<property name="voteDAO">
+			<ref bean="voteDAO" />
+		</property>
+	</bean>
+
+	<bean id="markDAO" class="com.teacher.dao.MarkDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="markService" class="com.teacher.service.MarkServiceImpl">
+		<property name="markDAO">
+			<ref bean="markDAO" />
+		</property>
+	</bean>
+
+	<bean id="messageDAO" class="com.teacher.dao.MessageDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="messageService" class="com.teacher.service.MessageServiceImpl">
+		<property name="messageDAO">
+			<ref bean="messageDAO" />
+		</property>
+	</bean>
+
+	<bean id="stu_claDAO" class="com.teacher.dao.Stu_claDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="stu_claService" class="com.teacher.service.Stu_claServiceImpl">
+		<property name="stu_claDAO">
+			<ref bean="stu_claDAO" />
+		</property>
+	</bean>
+
+	<bean id="tea_claDAO" class="com.teacher.dao.Tea_claDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="tea_claService" class="com.teacher.service.Tea_claServiceImpl">
+		<property name="tea_claDAO">
+			<ref bean="tea_claDAO" />
+		</property>
+	</bean>
+
+	<bean id="stu_tea_votDAO" class="com.teacher.dao.Stu_tea_votDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="stu_tea_votService" class="com.teacher.service.Stu_tea_votServiceImpl">
+		<property name="stu_tea_votDAO">
+			<ref bean="stu_tea_votDAO" />
+		</property>
+	</bean>
+
+	<bean id="addTeacher" class="com.teacher.action.AddTeacher" scope="prototype">
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="addStudent" class="com.teacher.action.AddStudent" scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+		<property name="stu_claService">
+			<ref bean="stu_claService" />
+		</property>
+	</bean>
+
+	<bean id="addLeader" class="com.teacher.action.AddLeader" scope="prototype">
+		<property name="leaderService">
+			<ref bean="leaderService" />
+		</property>
+	</bean>
+
+	<bean id="addClass" class="com.teacher.action.AddClass_class"
+		scope="prototype">
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+	</bean>
+
+	<bean id="showClass" class="com.teacher.action.ShowAllClass_class"
+		scope="prototype">
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+	</bean>
+
+	<bean id="showStudent" class="com.teacher.action.ShowAllStudent"
+		scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+	</bean>
+
+	<bean id="showTeacher" class="com.teacher.action.ShowAllTeacher"
+		scope="prototype">
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="deleteTeacher" class="com.teacher.action.DeleteTeacher"
+		scope="prototype">
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="deleteStudent" class="com.teacher.action.DeleteStudent"
+		scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+		<property name="stu_claService">
+			<ref bean="stu_claService" />
+		</property>
+	</bean>
+
+	<bean id="showLeader" class="com.teacher.action.ShowAllLeader"
+		scope="prototype">
+		<property name="leaderService">
+			<ref bean="leaderService" />
+		</property>
+	</bean>
+
+	<bean id="deleteLeader" class="com.teacher.action.DeleteLeader"
+		scope="prototype">
+		<property name="leaderService">
+			<ref bean="leaderService" />
+		</property>
+	</bean>
+
+	<bean id="showStudent_update" class="com.teacher.action.ShowStudent_update"
+		scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+		<property name="stu_claService">
+			<ref bean="stu_claService" />
+		</property>
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+	</bean>
+
+	<bean id="updateStudent" class="com.teacher.action.UpdateStudent"
+		scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+		<property name="stu_claService">
+			<ref bean="stu_claService" />
+		</property>
+	</bean>
+
+	<bean id="showAllClass" class="com.teacher.action.ShowAllClass_class"
+		scope="prototype">
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+	</bean>
+
+	<bean id="updateClass" class="com.teacher.action.UpdateClass_class"
+		scope="prototype">
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+	</bean>
+
+	<bean id="showClass_update" class="com.teacher.action.ShowClass_update"
+		scope="prototype">
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+	</bean>
+
+	<bean id="showTeacher_update" class="com.teacher.action.ShowTeacher_update"
+		scope="prototype">
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+		<property name="tea_claService">
+			<ref bean="tea_claService" />
+		</property>
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+	</bean>
+
+	<bean id="addTea_cla" class="com.teacher.action.AddTea_cla" scope="prototype">
+		<property name="tea_claService">
+			<ref bean="tea_claService" />
+		</property>
+	</bean>
+
+	<bean id="updateTeacher" class="com.teacher.action.UpdateTeacher"
+		scope="prototype">
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="deleteTea_cla" class="com.teacher.action.DeleteTea_cla"
+		scope="prototype">
+		<property name="tea_claService">
+			<ref bean="tea_claService" />
+		</property>
+	</bean>
+
+	<bean id="loginLeader" class="com.teacher.action.LoginLeader"
+		scope="prototype">
+		<property name="leaderService">
+			<ref bean="leaderService" />
+		</property>
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+	</bean>
+
+	<bean id="loginStudent" class="com.teacher.action.LoginStudent"
+		scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+		<property name="stu_claService">
+			<ref bean="stu_claService" />
+		</property>
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+		<property name="tea_claService">
+			<ref bean="tea_claService" />
+		</property>
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="loginTeacher" class="com.teacher.action.LoginTeacher"
+		scope="prototype">
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+		<property name="markService">
+			<ref bean="markService" />
+		</property>
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+	</bean>
+
+	<bean id="addVote" class="com.teacher.action.AddVote" scope="prototype">
+		<property name="voteService">
+			<ref bean="voteService" />
+		</property>
+		<property name="stu_tea_votService">
+			<ref bean="stu_tea_votService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+		<property name="stu_claService">
+			<ref bean="stu_claService" />
+		</property>
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+		<property name="tea_claService">
+			<ref bean="tea_claService" />
+		</property>
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="vote_hold" class="com.teacher.action.Vote_hold" scope="prototype">
+	</bean>
+
+	<bean id="addMark" class="com.teacher.action.AddMark" scope="prototype">
+		<property name="voteService">
+			<ref bean="voteService" />
+		</property>
+		<property name="stu_tea_votService">
+			<ref bean="stu_tea_votService" />
+		</property>
+		<property name="stu_claService">
+			<ref bean="stu_claService" />
+		</property>
+		<property name="tea_claService">
+			<ref bean="tea_claService" />
+		</property>
+		<property name="markService">
+			<ref bean="markService" />
+		</property>
+	</bean>
+
+	<bean id="showMark" class="com.teacher.action.ShowAllMark" scope="prototype">
+		<property name="markService">
+			<ref bean="markService" />
+		</property>
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+	</bean>
+
+	<bean id="updateLeader" class="com.teacher.action.UpdateLeader"
+		scope="prototype">
+		<property name="leaderService">
+			<ref bean="leaderService" />
+		</property>
+	</bean>
+
+	<bean id="showLeader_update" class="com.teacher.action.ShowLeader_update"
+		scope="prototype">
+		<property name="leaderService">
+			<ref bean="leaderService" />
+		</property>
+	</bean>
+
+
+	<bean id="updateStudent_stu" class="com.teacher.action.UpdateStudent_stu"
+		scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+	</bean>
+
+	<bean id="showStudent_stu" class="com.teacher.action.ShowStudent_stu"
+		scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+	</bean>
+	
+	<bean id="showMessage" class="com.teacher.action.ShowMessage"
+		scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+	</bean>
+	
+	<bean id="showMessage_tea" class="com.teacher.action.ShowMessage_tea"
+		scope="prototype">
+		<property name="studentService">
+			<ref bean="studentService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+	</bean>
+	
+	<bean id="showTeacher_tea" class="com.teacher.action.ShowTeacher_tea"
+		scope="prototype">
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+	</bean>
+	
+	<bean id="updateTeacher_tea" class="com.teacher.action.UpdateTeacher_tea"
+		scope="prototype">
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+	</bean>
+	
+	<bean id="showMark_lea" class="com.teacher.action.ShowAllMark_lea" scope="prototype">
+		<property name="markService">
+			<ref bean="markService" />
+		</property>
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+	</bean>
+	
+	<bean id="allMarkForExcel" class="com.teacher.action.AllMarkForExcel" scope="prototype">
+		<property name="markService">
+			<ref bean="markService" />
+		</property>
+		<property name="teacherService">
+			<ref bean="teacherService" />
+		</property>
+		<property name="class_classService">
+			<ref bean="class_classService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,57 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page isErrorPage="true" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!doctype html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>注册</title>
+
+</head> 
+<body> 
+
+
+<span class="titletxt"><h4>领导登录</h4></span>
+	    <form action="loginLeader" method="post" >
+	    	<div class="form_tit">
+	    	<h5>领导账号：<input type="text" name="lea_acc" class="text1" id="number"/></h5>
+	    	<h5>领导密码：<input type="text" name="lea_password" class="text1" id="password"/></h5>
+	    	</div>
+	    	<div class="btns">
+		    	<input type="submit" value="提交" class="btn1" id="submitbtn1"/>
+		    	<input type="reset" value="重置" class="btn1"/>
+	    	</div>
+	    </form>
+<span class="titletxt"><h4>学生登录</h4></span>
+	    <form action="loginStudent" method="post" >
+	    	<div class="form_tit">
+	    	<h5>学生账号：<input type="text" name="stu_num" class="text1" id="number"/></h5>
+	    	<h5>学生密码：<input type="text" name="stu_password" class="text1" id="password"/></h5>
+	    	</div>
+	    	<div class="btns">
+		    	<input type="submit" value="提交" class="btn1" id="submitbtn1"/>
+		    	<input type="reset" value="重置" class="btn1"/>
+	    	</div>
+	    </form>
+<span class="titletxt"><h4>教师登录</h4></span>
+	    <form action="loginTeacher" method="post" >
+	    	<div class="form_tit">
+	    	<h5>教师账号：<input type="text" name="tea_acc" class="text1" id="number"/></h5>
+	    	<h5>教师密码：<input type="text" name="tea_password" class="text1" id="password"/></h5>
+	    	</div>
+	    	<div class="btns">
+		    	<input type="submit" value="提交" class="btn1" id="submitbtn1"/>
+		    	<input type="reset" value="重置" class="btn1"/>
+	    	</div>
+	    </form>	    
+	    
+
+<canvas id="canvas"></canvas>
+</body>
+</html>
+

@@ -1,0 +1,82 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!doctype html>
+<html>
+<head>
+	<script language="javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
+	<script language="javascript" src="<%=basePath%>js/jquery.form.js"></script>
+<script>		
+		$("div.holder").jPages({
+			containerID: "itemContainer",
+			perPage : 15,
+      		delay : 15
+		});
+		function deleteTea_cla(id,i){
+			$.ajax({
+				url:"deleteTea_cla?id="+id,
+				type:"post",
+				async: false,
+				success:function(){
+					alert("删除成功!");
+					$("#itemContainer tr:eq(" + i + ")").fadeOut(1000);
+				}
+			});
+		}
+	</script>
+<meta charset="utf-8">
+<title>注册</title>
+
+</head> 
+<body> 
+
+<div class="div"> 
+<span class="titletxt"><h4>用户注册</h4></span>
+	    <form action="updateTeacher" method="post" >
+	   	 	<input type="text" name="tea_id" class="text1" id="id"value="${teacher.tea_id}"style="visibility:hidden"/>
+	    	<h5>教师名称：<input type="text" name="tea_name" class="text1" id="tea_name"value="${teacher.tea_name}"/></h5>
+	    	<h5>教师账号：<input type="text" name="tea_acc" class="text1" id="tea_acc"value="${teacher.tea_acc}"/></h5>
+	    	<h5>密码：<input type="text" name="tea_password" class="text1" id="tea_password"value="${teacher.tea_password}"/></h5>
+		    	<input type="submit" value="提交" class="btn1" id="submitbtn1"/>
+		    	<input type="reset" value="重置" class="btn1"/>
+	    </form>
+	     <form action="addTea_cla" method="post" >
+	    <s:action name="showClass" executeResult="false" ignoreContextParams="false"></s:action>	
+	    <input type="text" name="tea_id" class="text1" id="id"value="${teacher.tea_id}"style="visibility:hidden"/>
+	    		关联班级：<select name="cla_id">
+	    			<s:iterator value="#request.allClass" var="cla">
+							<option value="${cla.cla_id}">${cla.cla_name}</option>
+					</s:iterator>
+	    		</select>
+	    		<input type="submit" value="提交" class="btn1" id="submitbtn1"/>
+	    		</form>
+	    <table class="table_article">
+	    		<tr>
+	    			<th  width="8%"><center>班级主键</center></th>
+	    			<th  width="35%"><center>关联主键</center></th>
+	    			<th  width="20%"><center>删除关联</center></th>
+	    		</tr>
+	    		<tbody id="itemContainer">
+					<% int i=1; %>
+	            <s:iterator value="#request.allTea_cla" var="cla">         
+	    		<tr>
+	    			<td><center>${cla.cla_id}</center></td>
+	    			<td><center>${cla.id}</center></td>
+	    			  <td><a href="javascript:void(0)" title="删除" id="delete" onclick="deleteTea_cla(${cla.id},<%=i-1%>)">删除</a>  
+	    			  </td>
+	    		</tr>
+					 <% i++; %>
+	    		</s:iterator>
+	    		</tbody>
+	    	</table>
+	    
+</div>
+
+
+</body>
+</html>
+

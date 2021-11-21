@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.multipart.maxSize" value="5242880" />
+	<package name="myPackage" extends="struts-default">
+		<action name="loginAction" class="loginAction">
+			<result name="admin">/WEB-INF/index.jsp</result>
+			<result name="error">index.jsp</result>
+			<result name="*">index.jsp</result>
+		</action>
+
+		<action name="addTeacher" class="addTeacher">
+			<result name="success">/WEB-INF/index.jsp</result>
+			<result name="error">addTeacher.jsp</result>
+		</action>
+
+		<action name="addStudent" class="addStudent">
+			<result name="success">/WEB-INF/index.jsp</result>
+			<result name="error">addStudent.jsp</result>
+		</action>
+
+		<action name="addLeader" class="addLeader">
+			<result name="success">/WEB-INF/index.jsp</result>
+			<result name="error">addLeader.jsp</result>
+		</action>
+
+		<action name="addClass" class="addClass">
+			<result name="success">/WEB-INF/index.jsp</result>
+			<result name="error">addClass.jsp</result>
+		</action>
+
+		<action name="showClass" class="showClass">
+		</action>
+
+		<action name="showStudent" class="showStudent">
+			<result name="success">/WEB-INF/allStudent.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="showTeacher" class="showTeacher">
+			<result name="success">/WEB-INF/allTeacher.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="showLeader" class="showLeader">
+			<result name="success">/WEB-INF/allLeader.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="deleteTeacher" class="deleteTeacher">
+			<result name="success">/WEB-INF/allTeacher.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="deleteStudent" class="deleteStudent">
+			<result name="success">/WEB-INF/allStudent.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="deleteLeader" class="deleteLeader">
+			<result name="success">/WEB-INF/allLeader.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="showStudentUpdate" class="showStudent_update">
+			<result name="success">/WEB-INF/updateStudent.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="updateStudent" class="updateStudent">
+			<result name="success">/WEB-INF/updateStudent_hold.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="showAllClass" class="showAllClass">
+			<result name="success">/WEB-INF/allClass.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="showClassUpdate" class="showClass_update">
+			<result name="success">/WEB-INF/updateClass.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="updateClass" class="updateClass">
+			<result name="success">/WEB-INF/updateClass_hold.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="showTeacherUpdate" class="showTeacher_update">
+			<result name="success">/WEB-INF/updateTeacher.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="addTea_cla" class="addTea_cla">
+			<result name="success">addTea_cla.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="updateTeacher" class="updateTeacher">
+			<result name="success">/WEB-INF/updateTeacher_hold.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="deleteTea_cla" class="deleteTea_cla">
+			<result name="success">/WEB-INF/updateTeacher.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+
+		<action name="loginLeader" class="loginLeader">
+			<result name="success">leader.jsp</result>
+			<result name="error">error.jsp</result>
+			<result name="admin">/WEB-INF/index.jsp</result>
+		</action>
+
+		<action name="loginStudent" class="loginStudent">
+			<result name="success">student.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="loginTeacher" class="loginTeacher">
+			<result name="success">teacher.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="addVote" class="addVote">
+			<result name="success">student.jsp</result>
+			<result name="error">student.jsp</result>
+		</action>
+
+		<action name="vote_hold" class="vote_hold">
+			<result name="success">vote.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="addMark" class="addMark">
+			<result name="success">/WEB-INF/index.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="showMark" class="showMark">
+			<result name="success">/WEB-INF/allMark.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		
+		<action name="updateLeader" class="updateLeader">
+			<result name="success">/WEB-INF/updateLeader_hold.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		
+		<action name="showLeaderUpdate" class="showLeader_update">
+			<result name="success">/WEB-INF/updateLeader.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		
+		<action name="updateStudent_stu" class="updateStudent_stu">
+			<result name="success">login.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		
+		<action name="showStudent_stu" class="showStudent_stu">
+			<result name="success">updateStudent_stu.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		
+		<action name="showMessage" class="showMessage">
+			<result name="success">showMessage.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		
+		<action name="showMessage_tea" class="showMessage_tea">
+			<result name="success">showMessage_tea.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		
+		<action name="showTeacher_tea" class="showTeacher_tea">
+			<result name="success">updateTeacher_tea.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		
+		<action name="updateTeacher_tea" class="updateTeacher_tea">
+			<result name="success">login.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		
+		<action name="showMark_lea" class="showMark_lea">
+			<result name="success">mark_lea.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		
+		<action name="allMarkForExcel" class="allMarkForExcel">
+			<result name="success">/WEB-INF/allMark.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+	</package>
+</struts>    

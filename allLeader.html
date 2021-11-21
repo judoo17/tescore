@@ -1,0 +1,75 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <base href="<%=basePath%>">   
+    <title>领导列表</title>    
+
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>admin/images/main.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>styles/jPages.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>styles/animate.css">
+	<script language="javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
+	<script language="javascript" src="<%=basePath%>js/jquery.form.js"></script>
+	<script src="<%=basePath%>js/jPages.js"></script>
+	<script>		
+		$("div.holder").jPages({
+			containerID: "itemContainer",
+			perPage : 15,
+      		delay : 15
+		});
+		function deleteLea(id,i){
+			$.ajax({
+				url:"deleteLeader?lea_id="+id,
+				type:"post",
+				async: false,
+				success:function(){
+					alert("删除成功!");
+					$("#itemContainer tr:eq(" + i + ")").fadeOut(1000);
+				}
+			});
+		}
+	</script>
+  </head>
+  
+  <body>
+    <div id="xjwz">
+  		<span class="titletxt">所有领导</span>
+  		
+	    <div class="articleList">
+	    	<table class="table_article">
+	    		<tr>
+	    			<th  width="8%"><center>领导账号</center></th>
+	    			<th  width="35%"><center>详细信息</center></th>
+	    			<th  width="8%"><center>领导权限</center></th>
+	    			<th  width="20%"><center>删除领导</center></th>
+	    		</tr>
+	    		<tbody id="itemContainer">
+	    			<% int i=1; %>
+	            <s:iterator value="#request.allLeader" var="lea">         
+	    		<tr>
+	    			<td><center>${lea.lea_acc}</center></td>
+	    			<td><center><a href="showLeader?id=${lea.lea_id}">${lea.lea_id}</a></center></td>
+	    			<td><center>${lea.lea_level}</center></td>
+	    			 <s:if test="#lea.lea_id==1">
+	    			 <td><center>教务处管理员账号不可删除</center> 
+	    			</td>
+					 </s:if>
+					 <s:else>
+	    			<td><center><a href="javascript:void(0)" title="删除" id="delete" onclick="deleteLea(${lea.lea_id},<%=i-1%>)">删除</a></center> 
+	    			</td>
+	    			</s:else>
+	    		</tr>
+					 <% i++; %>
+	    		</s:iterator>
+	    		</tbody>
+	    	</table>
+	    	<div class="holder"></div>
+	    </div>
+	</div>
+  </body>
+</html>

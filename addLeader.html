@@ -1,0 +1,37 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page isErrorPage="true" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!doctype html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>注册</title>
+
+</head> 
+<body> 
+
+<div class="div"> 
+<span class="titletxt"><h4>用户注册</h4></span>
+	    <form action="addLeader" method="post" >
+	    	<div class="form_tit">
+	    	<h5>领导等级：<input type="text" name="lea_level" class="text1" id="level"/></h5>
+	    	<h5>领导账号：<input type="text" name="lea_acc" class="text1" id="number"/></h5>
+	    	<h5>领导密码：<input type="text" name="lea_password" class="text1" id="password"/></h5>
+	    	</div>
+	    	<div class="btns">
+		    	<input type="submit" value="提交" class="btn1" id="submitbtn1"/>
+		    	<input type="reset" value="重置" class="btn1"/>
+	    	</div>
+	    </form>
+</div>
+
+
+<canvas id="canvas"></canvas>
+</body>
+</html>
+
